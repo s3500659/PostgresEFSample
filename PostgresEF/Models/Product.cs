@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -17,5 +18,6 @@ namespace PostgresEF.Models
         [Required(ErrorMessage = "Product needs a price")]
         public decimal Price { get; set; }
         public DateTime DateCreated { get; set; }
+        public ICollection<ProductInvoice> ProductInvoices { get; set; }
     }
 }

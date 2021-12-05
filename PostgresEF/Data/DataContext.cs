@@ -14,8 +14,32 @@ namespace PostgresEF.Data
 
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<ProductInvoice>()
+                .HasKey(pi => new {pi.ProductId, pi.InvoiceId});
+
+            modelBuilder.Entity<ProductInvoice>()
+                .HasOne(pi => pi.Product)
+                .WithMany(i => i.ProductInvoices)
+                .HasForeignKey(i => i.ProductId);
+
+            modelBuilder.Entity<ProductInvoice>()
+                .HasOne(i => i.Invoice)
+                .WithMany(pi => pi.ProductInvoices)
+                .HasForeignKey(i => i.InvoiceId);
+
+      
+        }
+
         public DbSet<Product> Products { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Email> Emails { get; set; }
+        public DbSet<Invoice> Invoices { get; set; }
+        public DbSet<ProductInvoice> ProductInvoices { get; set; }
+
+
     }
 }

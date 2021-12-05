@@ -10,8 +10,9 @@ namespace PostgresEF.Models
         public string FirstName { get; set; }
         [Required(ErrorMessage = "Last name is required")]
         public string LastName { get; set; }
-        [Required(ErrorMessage = "First name is required")]
+        [Required(ErrorMessage = "An email is required")]
         public ICollection<Email> Emails { get; set; }
+        public ICollection<Invoice> Invoices { get; set; }
 
     }
 }

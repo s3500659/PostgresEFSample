@@ -10,8 +10,8 @@ using PostgresEF.Data;
 namespace PostgresEF.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20211205193450_add-customer-email-models")]
-    partial class addcustomeremailmodels
+    [Migration("20211205203746_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,9 +29,11 @@ namespace PostgresEF.Migrations
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("FirstName")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -50,6 +52,7 @@ namespace PostgresEF.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("EmailAddress")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -57,6 +60,32 @@ namespace PostgresEF.Migrations
                     b.HasIndex("CustomerId");
 
                     b.ToTable("Emails");
+                });
+
+            modelBuilder.Entity("PostgresEF.Models.Invoice", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("DateCreated")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime>("DueDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<decimal>("Total")
+                        .HasColumnType("numeric");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("Invoices");
                 });
 
             modelBuilder.Entity("PostgresEF.Models.Product", b =>
@@ -85,11 +114,50 @@ namespace PostgresEF.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("PostgresEF.Models.ProductInvoice", b =>
+                {
+                    b.Property<int>("ProductId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("InvoiceId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("ProductId", "InvoiceId");
+
+                    b.HasIndex("InvoiceId");
+
+                    b.ToTable("ProductInvoices");
+                });
+
             modelBuilder.Entity("PostgresEF.Models.Email", b =>
                 {
                     b.HasOne("PostgresEF.Models.Customer", "Customer")
                         .WithMany("Emails")
                         .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PostgresEF.Models.Invoice", b =>
+                {
+                    b.HasOne("PostgresEF.Models.Customer", "Customer")
+                        .WithMany("Invoices")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PostgresEF.Models.ProductInvoice", b =>
+                {
+                    b.HasOne("PostgresEF.Models.Invoice", "Invoice")
+                        .WithMany("ProductInvoices")
+                        .HasForeignKey("InvoiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PostgresEF.Models.Product", "Product")
+                        .WithMany("ProductInvoices")
+                        .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

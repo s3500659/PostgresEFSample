@@ -13,6 +13,8 @@ namespace PostgresEF.Data
         DbSet<Product> Products { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Email> Emails { get; set; }
+        public DbSet<Invoice> Invoices { get; set; }
+        public DbSet<ProductInvoice> ProductInvoices { get; set; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }
