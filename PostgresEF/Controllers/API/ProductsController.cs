@@ -47,6 +47,7 @@ namespace PostgresEF.Controllers
             var product = new Product
             {
                 Name = createProductDto.Name,
+                Description = createProductDto.Description,
                 Price = createProductDto.Price,
                 DateCreated = DateTime.Now
             };
@@ -69,8 +70,9 @@ namespace PostgresEF.Controllers
         {
             var product = new Product
             {
-                ProductId = id,
+                ID = id,
                 Name = updateProductDto.Name,
+                Description = updateProductDto.Description,
                 Price = updateProductDto.Price
             };
 

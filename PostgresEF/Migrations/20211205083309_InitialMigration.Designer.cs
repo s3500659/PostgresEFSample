@@ -10,7 +10,7 @@ using PostgresEF.Data;
 namespace PostgresEF.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20211205081815_InitialMigration")]
+    [Migration("20211205083309_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,9 +23,8 @@ namespace PostgresEF.Migrations
 
             modelBuilder.Entity("PostgresEF.Models.Product", b =>
                 {
-                    b.Property<int>("ProductId")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnName("Id")
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
@@ -43,7 +42,7 @@ namespace PostgresEF.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("numeric");
 
-                    b.HasKey("ProductId");
+                    b.HasKey("ID");
 
                     b.ToTable("Products");
                 });

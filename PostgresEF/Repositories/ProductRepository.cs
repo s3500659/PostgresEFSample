@@ -48,12 +48,13 @@ namespace PostgresEF.Repositories
 
         public async Task Update(Product product)
         {
-            var itemToUpdate = await _context.Products.FindAsync(product.ProductId);
+            var itemToUpdate = await _context.Products.FindAsync(product.ID);
 
             if (itemToUpdate == null)
                 throw new NullReferenceException();
 
             itemToUpdate.Name = product.Name;
+            itemToUpdate.Description = product.Description;
             itemToUpdate.Price = product.Price;
             await _context.SaveChangesAsync();
         }

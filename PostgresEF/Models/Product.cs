@@ -6,10 +6,7 @@ namespace PostgresEF.Models
 {
     public class Product
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Required]
-        [Column("Id")]
-        public int ProductId { get; set; }
+        public int ID { get; set; }
 
         [Required(ErrorMessage = "Product needs a name")]
         public string Name { get; set; }
