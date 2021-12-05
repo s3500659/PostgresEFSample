@@ -11,6 +11,8 @@ namespace PostgresEF.Data
     public interface IDataContext
     {
         DbSet<Product> Products { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Email> Emails { get; set; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }

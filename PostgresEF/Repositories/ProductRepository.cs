@@ -20,6 +20,7 @@ namespace PostgresEF.Repositories
         public async Task Add(Product product)
         {
             _context.Products.Add(product);
+
             await _context.SaveChangesAsync();
         }
 
@@ -33,6 +34,7 @@ namespace PostgresEF.Repositories
             }
 
             _context.Products.Remove(itemToRemove);
+
             await _context.SaveChangesAsync();
         }
 
@@ -56,6 +58,7 @@ namespace PostgresEF.Repositories
             itemToUpdate.Name = product.Name;
             itemToUpdate.Description = product.Description;
             itemToUpdate.Price = product.Price;
+
             await _context.SaveChangesAsync();
         }
     }

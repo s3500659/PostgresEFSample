@@ -15,5 +15,7 @@ namespace PostgresEF.Data
         }
 
         public DbSet<Product> Products { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Email> Emails { get; set; }
     }
 }
