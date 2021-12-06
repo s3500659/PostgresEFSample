@@ -18,6 +18,6 @@ namespace PostgresEF.Models
         [Required(ErrorMessage = "Product needs a price")]
         public decimal Price { get; set; }
         public DateTime DateCreated { get; set; }
-        public ICollection<ProductInvoice> ProductInvoices { get; set; }
+        public virtual ICollection<ProductInvoice> ProductInvoices { get; set; } = new List<ProductInvoice>();
     }
 }

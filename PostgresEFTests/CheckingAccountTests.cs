@@ -14,9 +14,11 @@ namespace PostgresEFTests
             var currentBalance = 10;
             var withdrawal = 1;
             var expected = 9;
-            var email = new Email("vinh@gmail.com");
-            var customer = new Customer("Vinh", "Tran", email);
-            var account = new CheckingAccount(customer, currentBalance);
+
+            var account = new CheckingAccount
+            {
+                Balance = currentBalance
+            };
 
             // Act
             account.Withdraw(withdrawal);
@@ -29,9 +31,7 @@ namespace PostgresEFTests
         public void Withdraw_AmountMoreThanBalance_Throws()
         {
             // Arrange
-            var email = new Email("vinh@gmail.com");
-            var customer = new Customer("Vinh", "Tran", email);
-            var account = new CheckingAccount(customer, 0);
+            var account = new CheckingAccount();
 
             // Act and Assert
             Assert.Throws<ArgumentException>(() => account.Withdraw(20));
@@ -43,9 +43,10 @@ namespace PostgresEFTests
             var currentBalance = 10;
             var deposit = 10;
             var expected = 20;
-            var email = new Email("vinh@gmail.com");
-            var customer = new Customer("Vinh", "Tran", email);
-            var account = new CheckingAccount(customer, currentBalance);
+            var account = new CheckingAccount()
+            {
+                Balance = currentBalance
+            };
 
             account.Deposit(deposit);
 
@@ -57,9 +58,7 @@ namespace PostgresEFTests
         public void Deposit_InvalidAmount_ShouldThrowException()
         {
             var deposit = -1;
-            var email = new Email("vinh@gmail.com");
-            var customer = new Customer("Vinh", "Tran", email);
-            var account = new CheckingAccount(customer, 0);
+            var account = new CheckingAccount();
 
             Assert.Throws<ArgumentException>(() => account.Deposit(deposit));
         }

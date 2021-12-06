@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PostgresEF.Models;
+using PostgresEF.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,7 +40,6 @@ namespace PostgresEF.Data
         public DbSet<Email> Emails { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<ProductInvoice> ProductInvoices { get; set; }
-
-
+        public DbSet<CheckingAccount> CheckingAccounts { get; set; }
     }
 }

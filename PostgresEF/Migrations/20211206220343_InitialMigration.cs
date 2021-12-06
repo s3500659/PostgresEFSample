@@ -39,6 +39,26 @@ namespace PostgresEF.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CheckingAccounts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Balance = table.Column<decimal>(nullable: false),
+                    CustomerId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CheckingAccounts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CheckingAccounts_Customers_CustomerId",
+                        column: x => x.CustomerId,
+                        principalTable: "Customers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Emails",
                 columns: table => new
                 {
@@ -105,6 +125,11 @@ namespace PostgresEF.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_CheckingAccounts_CustomerId",
+                table: "CheckingAccounts",
+                column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Emails_CustomerId",
                 table: "Emails",
                 column: "CustomerId");
@@ -122,6 +147,9 @@ namespace PostgresEF.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "CheckingAccounts");
+
             migrationBuilder.DropTable(
                 name: "Emails");
 

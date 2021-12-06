@@ -8,10 +8,8 @@ namespace PostgresEF.Models
 
         [Required(ErrorMessage = "Email address is required")]
         public string EmailAddress { get; set; }
+        public int CustomerId { get; set; }
+        public virtual Customer Customer { get; set; }
 
-        public Email(string address)
-        {
-            EmailAddress = address;
-        }
     }
 }

@@ -18,6 +18,6 @@ namespace PostgresEF.Models
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
         [Required(ErrorMessage = "A product is required")]
-        public ICollection<ProductInvoice> ProductInvoices { get; set; }
+        public virtual ICollection<ProductInvoice> ProductInvoices { get; set; } = new List<ProductInvoice>();
     }
 }

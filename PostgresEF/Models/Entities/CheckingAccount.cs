@@ -5,14 +5,10 @@ namespace PostgresEF.Models.Entities
 {
     public class CheckingAccount : IAccount
     {
+        public int Id { get; set; }
         public decimal Balance { get; set; }
-        public Customer Customer { get; set; }
-
-        public CheckingAccount(Customer customer, decimal currentBalance)
-        {
-            Customer = customer;
-            Balance = currentBalance;
-        }
+        public int CustomerId { get; set; }
+        public virtual Customer Customer { get; set; }
 
         
         public void Deposit(decimal amount)

@@ -60,6 +60,26 @@ namespace PostgresEF.Migrations
                     b.ToTable("Emails");
                 });
 
+            modelBuilder.Entity("PostgresEF.Models.Entities.CheckingAccount", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<decimal>("Balance")
+                        .HasColumnType("numeric");
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("CheckingAccounts");
+                });
+
             modelBuilder.Entity("PostgresEF.Models.Invoice", b =>
                 {
                     b.Property<int>("Id")
@@ -131,6 +151,15 @@ namespace PostgresEF.Migrations
                 {
                     b.HasOne("PostgresEF.Models.Customer", "Customer")
                         .WithMany("Emails")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PostgresEF.Models.Entities.CheckingAccount", b =>
+                {
+                    b.HasOne("PostgresEF.Models.Customer", "Customer")
+                        .WithMany("CheckingAccounts")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
