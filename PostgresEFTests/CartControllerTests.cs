@@ -1,11 +1,8 @@
 ﻿using Moq;
 using PostgresEF.Controllers.API;
-using PostgresEF.Models.Entities;
 using PostgresEF.Models.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Xunit;
 
 namespace PostgresEFTests
@@ -27,7 +24,7 @@ namespace PostgresEFTests
             checkoutDtoMock = new Mock<ICheckoutDto>();
 
             var cartItemMock = new Mock<ICartItem>();
-            cartItemMock.Setup(item => item.Price).Returns(10);
+            cartItemMock.Setup(item => item.Price).Returns(It.IsAny<double>());
 
             items = new List<ICartItem>()
             {
