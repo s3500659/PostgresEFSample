@@ -1,11 +1,9 @@
-﻿
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using PostgresEF.Dtos;
 using PostgresEF.Models;
 using PostgresEF.Repositories;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace PostgresEF.Controllers

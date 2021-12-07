@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PostgresEF.Dtos;
 using PostgresEF.Models.Interfaces;
 
 namespace PostgresEF.Controllers.API
 {
     [ApiController]
-    [Route("[controller]")]
-    public class CartController
+    [Route("api/[controller]")]
+    public class CartController : ControllerBase
     {
         private readonly ICartService _cartService;
         private readonly IPaymentService _paymentService;
@@ -23,12 +22,13 @@ namespace PostgresEF.Controllers.API
         }
 
         [HttpPost]
-        public string CheckOut(ICheckoutDto checkOutDto)
+        [Route("[action]/{checkoutDto}")]
+        public string CheckOut(ICheckoutDto checkoutDto)
         {
-            var result = _paymentService.Charge(_cartService.Total(), checkOutDto.Card);
+            var result = _paymentService.Charge(_cartService.Total(), checkoutDto.Card);
             if (result)
             {
-                _shipmentService.Ship(checkOutDto.AddressInfo, _cartService.Items());
+                _shipmentService.Ship(checkoutDto.AddressInfo, _cartService.Items());
                 return "charged";
             }
             else
