@@ -4,6 +4,6 @@ namespace PostgresEF.Models.Interfaces
 {
     public interface IShipmentService
     {
-        void Ship(IAddressInfo addressInfo, IEnumerable<CartItem> items);
+        void Ship(IAddressInfo addressInfo, IEnumerable<ICartItem> items);
     }
 }

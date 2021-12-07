@@ -23,7 +23,7 @@ namespace PostgresEF.Controllers.API
         }
 
         [HttpPost]
-        public string CheckOut(CheckOutDto checkOutDto)
+        public string CheckOut(ICheckoutDto checkOutDto)
         {
             var result = _paymentService.Charge(_cartService.Total(), checkOutDto.Card);
             if (result)

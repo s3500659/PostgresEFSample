@@ -1,8 +1,6 @@
-﻿using PostgresEF.Models.Interfaces;
-
-namespace PostgresEF.Dtos
+﻿namespace PostgresEF.Models.Interfaces
 {
-    public class CheckOutDto : ICheckoutDto
+    public interface ICheckoutDto
     {
         public ICard Card { get; set; }
         public IAddressInfo AddressInfo { get; set; }
