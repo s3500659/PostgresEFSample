@@ -22,10 +22,14 @@ namespace PostgresEF.Controllers
 
         [HttpGet]
         [Route("[action]")]
-        public async Task<IEnumerable<IProduct>> GetProducts()
+        public async Task<ActionResult<IEnumerable<IProduct>>> GetProducts()
         {
             var products = await _productRepository.GetAll();
-            return products;
+
+            if (products == null) 
+                return NotFound();
+
+            return Ok(products);
         }
 
         [HttpGet]

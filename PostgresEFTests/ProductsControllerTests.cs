@@ -16,38 +16,38 @@ namespace PostgresEFTests
     public class ProductsControllerTests
     {
         private readonly Mock<IProductRepository> productRepoMock;
-        private readonly ProductsController productsController;
-        private readonly IEnumerable<IProduct> products;
 
         public ProductsControllerTests()
         {
             productRepoMock = new Mock<IProductRepository>();
+        }
 
+        [Fact]
+        public async void GetProducts_ShouldReturnAllProducts()
+        {
+            // arrange
             var itemMock = new Mock<IProduct>();
             itemMock.Setup(x => x.ID).Returns(It.IsAny<int>());
 
-            products = new List<IProduct>()
+            var products = new List<IProduct>()
             {
                 itemMock.Object,
             };
 
             productRepoMock.Setup(p => p.GetAll())
                 .ReturnsAsync(products.AsEnumerable());
-
-            productsController = new ProductsController(productRepoMock.Object);
-        }
-
-        [Fact]
-        public async void GetProducts_ShouldReturnAllProducts()
-        {
+            
+            // act
+            var productsController = new ProductsController(productRepoMock.Object);
 
             var result = await productsController.GetProducts();
 
+            var actual = (result.Result as OkObjectResult).Value;
+
+            // assert
             productRepoMock.Verify(p => p.GetAll(), Times.Once);
 
-            Assert.Equal(products, result);
-
-            
+            Assert.Equal(products, actual);
         }
     }
 }
