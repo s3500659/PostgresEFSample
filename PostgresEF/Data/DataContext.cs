@@ -41,5 +41,6 @@ namespace PostgresEF.Data
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<ProductInvoice> ProductInvoices { get; set; }
         public DbSet<CheckingAccount> CheckingAccounts { get; set; }
+        public DbSet<Employee> Employees { get; set; }
     }
 }

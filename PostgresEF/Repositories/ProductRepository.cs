@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PostgresEF.Data;
+using PostgresEF.Interfaces;
 using PostgresEF.Models;
 using System;
 using System.Collections.Generic;
@@ -43,7 +44,7 @@ namespace PostgresEF.Repositories
             return await _context.Products.FindAsync(id);
         }
 
-        public async Task<IEnumerable<Product>> GetAll()
+        public async Task<IEnumerable<IProduct>> GetAll()
         {
             return await _context.Products.ToListAsync();
         }

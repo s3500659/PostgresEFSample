@@ -1,11 +1,12 @@
-﻿using System;
+﻿using PostgresEF.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PostgresEF.Models
 {
-    public class Product
+    public class Product : IProduct
     {
         public int ID { get; set; }
 

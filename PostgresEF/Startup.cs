@@ -9,7 +9,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using PostgresEF.Data;
+using PostgresEF.Interfaces;
 using PostgresEF.Repositories;
+using PostgresEF.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +37,8 @@ namespace PostgresEF
             services.AddScoped<IDataContext>(provider => provider.GetService<DataContext>());
 
             services.AddScoped<IProductRepository, ProductRepository>();
+
+            services.AddScoped<IEmployeeService, EmployeeService>();
 
             services.AddControllers();
 

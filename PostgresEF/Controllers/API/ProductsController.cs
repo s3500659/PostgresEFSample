@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PostgresEF.Dtos;
+using PostgresEF.Interfaces;
 using PostgresEF.Models;
 using PostgresEF.Repositories;
 using System;
@@ -21,10 +22,10 @@ namespace PostgresEF.Controllers
 
         [HttpGet]
         [Route("[action]")]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+        public async Task<IEnumerable<IProduct>> GetProducts()
         {
             var products = await _productRepository.GetAll();
-            return Ok(products);
+            return products;
         }
 
         [HttpGet]
