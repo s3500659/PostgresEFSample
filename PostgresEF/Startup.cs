@@ -41,7 +41,7 @@ namespace PostgresEF
 
             services.AddScoped<IProductRepository, ProductRepository>();
 
-            services.AddScoped<IEmployeeService, EmployeeService>();
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 
             services.AddScoped<IToyRepository, ToyRepository>();
 

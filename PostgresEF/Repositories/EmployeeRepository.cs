@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace PostgresEF.Services
 {
-    public class EmployeeService : IEmployeeService
+    public class EmployeeRepository : IEmployeeRepository
     {
         #region Property
         private readonly IDataContext _dbContext;
         #endregion
 
         #region Constructor 
-        public EmployeeService(IDataContext dbContext)
+        public EmployeeRepository(IDataContext dbContext)
         {
             _dbContext = dbContext;
         }

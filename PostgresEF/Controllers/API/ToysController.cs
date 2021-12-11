@@ -20,8 +20,8 @@ namespace PostgresEF.Controllers.API
             _toyFactory = toyFactory;
         }
 
-        [HttpGet]
-        [Route("[action]/{id}")]
+        // GET: api/Toys/5
+        [HttpGet("{id}")]
         public async Task<ActionResult<Toy>> GetToyById(int id)
         {
             var toy = await _toyService.GetToyById(id);
@@ -32,8 +32,8 @@ namespace PostgresEF.Controllers.API
             return Ok(toy);
         }
 
+        // GETL api/Toys
         [HttpPost]
-        [Route("[action]")]
         public async Task<ActionResult> CreateToy(CreateToyDto createToyDto)
         {
             var toy = _toyFactory.CreateToy();

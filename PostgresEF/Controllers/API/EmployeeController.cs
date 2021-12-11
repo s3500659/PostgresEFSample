@@ -9,15 +9,14 @@ namespace PostgresEF.Controllers.API
     [Route("api/[controller]")]
     public class EmployeeController : ControllerBase
     {
-        private readonly IEmployeeService _employeeService;
+        private readonly IEmployeeRepository _employeeService;
 
-        public EmployeeController(IEmployeeService employeeService)
+        public EmployeeController(IEmployeeRepository employeeService)
         {
             _employeeService = employeeService;
         }
 
-        [HttpGet]
-        [Route("[action]/{empId}")]
+        [HttpGet("{id}")]
         public async Task<string> GetEmployeeById(int empId)
         {
             var result = await _employeeService.GetEmployeeById(empId);
@@ -25,8 +24,7 @@ namespace PostgresEF.Controllers.API
             return result;
         }
 
-        [HttpGet]
-        [Route("[action]/{empId}")]
+        [HttpGet("id")]
         public async Task<Employee> GetEmployeeDetails(int empId)
         {
             var result = await _employeeService.GetEmployeeDetails(empId);

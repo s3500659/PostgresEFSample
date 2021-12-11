@@ -12,11 +12,11 @@ namespace PostgresEFTests
 {
     public class EmployeeControllerTests
     {
-        private readonly Mock<IEmployeeService> employeeServiceMock;
+        private readonly Mock<IEmployeeRepository> employeeServiceMock;
 
         public EmployeeControllerTests()
         {
-            employeeServiceMock = new Mock<IEmployeeService>();
+            employeeServiceMock = new Mock<IEmployeeRepository>();
         }
 
         [Fact]

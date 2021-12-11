@@ -21,19 +21,17 @@ namespace PostgresEF.Controllers
         }
 
         [HttpGet]
-        [Route("[action]")]
         public async Task<ActionResult<IEnumerable<IProduct>>> GetProducts()
         {
             var products = await _productRepository.GetAll();
 
-            if (products == null) 
+            if (products == null)
                 return NotFound();
 
             return Ok(products);
         }
 
-        [HttpGet]
-        [Route("[action]/{id}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<IProduct>> GetProduct(int id)
         {
             var product = await _productRepository.Get(id);
@@ -45,7 +43,6 @@ namespace PostgresEF.Controllers
         }
 
         [HttpPost]
-        [Route("[action]")]
         public async Task<ActionResult> CreateProduct(CreateProductDto createProductDto)
         {
             var product = new Product
@@ -60,17 +57,15 @@ namespace PostgresEF.Controllers
             return Ok();
         }
 
-        [HttpDelete]
-        [Route("[action]/{id}")]
+        [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteProduct(int id)
         {
             await _productRepository.Delete(id);
             return Ok();
         }
 
-        [HttpPut]
-        [Route("[action]/{id}")]
-        public async Task<ActionResult> UpdateProduct(int id, UpdateProductDto updateProductDto)
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdateProduct(int id, [FromBody]UpdateProductDto updateProductDto)
         {
             var product = new Product
             {
