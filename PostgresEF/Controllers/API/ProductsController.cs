@@ -34,7 +34,7 @@ namespace PostgresEF.Controllers
 
         [HttpGet]
         [Route("[action]/{id}")]
-        public async Task<ActionResult<Product>> GetProduct(int id)
+        public async Task<ActionResult<IProduct>> GetProduct(int id)
         {
             var product = await _productRepository.Get(id);
 
