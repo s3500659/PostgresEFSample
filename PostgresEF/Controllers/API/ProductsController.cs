@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PostgresEF.Dtos;
+using PostgresEF.Factory.Interfaces;
 using PostgresEF.Interfaces;
 using PostgresEF.Models;
 using PostgresEF.Repositories;
@@ -14,10 +15,14 @@ namespace PostgresEF.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly IProductRepository _productRepository;
+        private readonly IProductFactory _productFactory;
 
-        public ProductsController(IProductRepository productRepository)
+        public ProductsController(
+            IProductRepository productRepository, 
+            IProductFactory productFactory)
         {
             _productRepository = productRepository;
+            _productFactory = productFactory;
         }
 
         [HttpGet]
@@ -45,13 +50,11 @@ namespace PostgresEF.Controllers
         [HttpPost]
         public async Task<ActionResult> CreateProduct(CreateProductDto createProductDto)
         {
-            var product = new Product
-            {
-                Name = createProductDto.Name,
-                Description = createProductDto.Description,
-                Price = createProductDto.Price,
-                DateCreated = DateTime.Now
-            };
+            var product = _productFactory.CreateProduct();
+            product.Name = createProductDto.Name;
+            product.Description = createProductDto.Description;
+            product.Price = createProductDto.Price;
+            product.DateCreated = DateTime.Now;
 
             await _productRepository.Add(product);
             return Ok();
@@ -67,13 +70,11 @@ namespace PostgresEF.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateProduct(int id, [FromBody]UpdateProductDto updateProductDto)
         {
-            var product = new Product
-            {
-                ID = id,
-                Name = updateProductDto.Name,
-                Description = updateProductDto.Description,
-                Price = updateProductDto.Price
-            };
+            var product = _productFactory.CreateProduct();
+            product.ID = id;
+            product.Name = updateProductDto.Name;
+            product.Description= updateProductDto.Description;
+            product.Price= updateProductDto.Price;
 
             await _productRepository.Update(product);
             return Ok();

@@ -23,6 +23,6 @@ namespace PostgresEF.Models
 
         [MaxLength(255)]
         public DateTime DateCreated { get; set; }
-        public virtual ICollection<ProductInvoice> ProductInvoices { get; set; } = new List<ProductInvoice>();
+        public virtual ICollection<ProductInvoice> ProductInvoices { get; set; }
     }
 }

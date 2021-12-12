@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using PostgresEF.Data;
 using PostgresEF.Factory;
+using PostgresEF.Factory.Interfaces;
 using PostgresEF.Interfaces;
 using PostgresEF.Models.Entities;
 using PostgresEF.Models.Interfaces;
@@ -50,6 +51,8 @@ namespace PostgresEF
             services.AddScoped<ITodoItemRepository, TodoItemRepository>();
 
             services.AddScoped<ITodoItemFactory, TodoItemFactory>();
+
+            services.AddScoped<IProductFactory, ProductFactory>();
 
             services.AddControllers();
 

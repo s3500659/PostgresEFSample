@@ -21,6 +21,6 @@ namespace PostgresEF.Models
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
 
-        public virtual ICollection<ProductInvoice> ProductInvoices { get; set; } = new List<ProductInvoice>();
+        public virtual ICollection<ProductInvoice> ProductInvoices { get; set; }
     }
 }

@@ -1,14 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Moq;
 using PostgresEF.Controllers;
+using PostgresEF.Factory.Interfaces;
 using PostgresEF.Interfaces;
-using PostgresEF.Models;
 using PostgresEF.Repositories;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace PostgresEFTests
@@ -16,10 +13,12 @@ namespace PostgresEFTests
     public class ProductsControllerTests
     {
         private readonly Mock<IProductRepository> productRepoMock;
+        private readonly Mock<IProductFactory> productFactory;
 
         public ProductsControllerTests()
         {
             productRepoMock = new Mock<IProductRepository>();
+            productFactory = new Mock<IProductFactory>();
         }
 
         [Fact]
@@ -38,7 +37,7 @@ namespace PostgresEFTests
                 .ReturnsAsync(products.AsEnumerable());
             
             // act
-            var productsController = new ProductsController(productRepoMock.Object);
+            var productsController = new ProductsController(productRepoMock.Object, productFactory.Object);
 
             var result = await productsController.GetProducts();
 
