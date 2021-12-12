@@ -2,7 +2,7 @@
 
 namespace PostgresEF.Models.Interfaces
 {
-    public interface IShipmentService
+    public interface IShipmentRepository
     {
         void Ship(IAddressInfo addressInfo, IEnumerable<ICartItem> items);
     }

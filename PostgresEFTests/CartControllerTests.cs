@@ -10,17 +10,17 @@ namespace PostgresEFTests
     public class CartControllerTests
     {
         private readonly CartController controller;
-        private readonly Mock<IPaymentService> paymentServiceMock;
+        private readonly Mock<IPaymentRepository> paymentServiceMock;
         private readonly Mock<ICartService> cartServiceMock;
-        private readonly Mock<IShipmentService> shipmentServiceMock;
+        private readonly Mock<IShipmentRepository> shipmentServiceMock;
         private readonly Mock<ICheckoutDto> checkoutDtoMock;
         private readonly List<ICartItem> items;
 
         public CartControllerTests()
         {
-            paymentServiceMock = new Mock<IPaymentService>();
+            paymentServiceMock = new Mock<IPaymentRepository>();
             cartServiceMock = new Mock<ICartService>();
-            shipmentServiceMock = new Mock<IShipmentService>();
+            shipmentServiceMock = new Mock<IShipmentRepository>();
             checkoutDtoMock = new Mock<ICheckoutDto>();
 
             var cartItemMock = new Mock<ICartItem>();

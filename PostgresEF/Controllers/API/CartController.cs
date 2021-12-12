@@ -8,13 +8,13 @@ namespace PostgresEF.Controllers.API
     public class CartController : ControllerBase
     {
         private readonly ICartService _cartService;
-        private readonly IPaymentService _paymentService;
-        private readonly IShipmentService _shipmentService;
+        private readonly IPaymentRepository _paymentService;
+        private readonly IShipmentRepository _shipmentService;
 
         public CartController(
             ICartService cartService, 
-            IPaymentService paymentService, 
-            IShipmentService shipmentService)
+            IPaymentRepository paymentService, 
+            IShipmentRepository shipmentService)
         {
             _cartService = cartService;
             _paymentService = paymentService;

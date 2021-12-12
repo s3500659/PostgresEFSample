@@ -1,6 +1,6 @@
 ﻿namespace PostgresEF.Models.Interfaces
 {
-    public interface IPaymentService
+    public interface IPaymentRepository
     {
         bool Charge(double total, ICard card);
     }
