@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using PostgresEF.Dtos;
 using PostgresEF.Factory.Interfaces;
 using PostgresEF.Interfaces;
@@ -16,35 +17,38 @@ namespace PostgresEF.Controllers
     {
         private readonly IProductRepository _productRepository;
         private readonly IProductFactory _productFactory;
+        private readonly IMapper _mapper;
 
         public ProductsController(
             IProductRepository productRepository, 
-            IProductFactory productFactory)
+            IProductFactory productFactory,
+            IMapper mapper)
         {
             _productRepository = productRepository;
             _productFactory = productFactory;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<IProduct>>> GetProducts()
+        public async Task<ActionResult<IEnumerable<ReadProductDto>>> GetProducts()
         {
             var products = await _productRepository.GetAll();
 
             if (products == null)
                 return NotFound();
 
-            return Ok(products);
+            return Ok(_mapper.Map<IEnumerable<ReadProductDto>>(products));
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<IProduct>> GetProduct(int id)
+        public async Task<ActionResult<ReadProductDto>> GetProduct(int id)
         {
             var product = await _productRepository.Get(id);
 
             if (product == null)
                 return NotFound();
 
-            return Ok(product);
+            return Ok(_mapper.Map<ReadProductDto>(product));
         }
 
         [HttpPost]

@@ -1,8 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Moq;
 using PostgresEF.Controllers;
+using PostgresEF.Dtos;
 using PostgresEF.Factory.Interfaces;
 using PostgresEF.Interfaces;
+using PostgresEF.Profiles;
 using PostgresEF.Repositories;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,18 +38,29 @@ namespace PostgresEFTests
 
             productRepoMock.Setup(p => p.GetAll())
                 .ReturnsAsync(products.AsEnumerable());
-            
+
             // act
-            var productsController = new ProductsController(productRepoMock.Object, productFactory.Object);
+            var mockMapper = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new ProductsProfile());
+            });
+            var mapper = mockMapper.CreateMapper();
+
+            var productsController = new ProductsController(
+                productRepoMock.Object, productFactory.Object, mapper);
+
 
             var result = await productsController.GetProducts();
 
-            var actual = (result.Result as OkObjectResult).Value;
+            var actual = (result.Result as OkObjectResult).Value as IEnumerable<ReadProductDto>;
 
             // assert
             productRepoMock.Verify(p => p.GetAll(), Times.Once);
 
-            Assert.Equal(products, actual);
+            var expected = actual.FirstOrDefault().Name;
+            var actual2 = products.FirstOrDefault().Name;
+
+            Assert.Equal(expected, actual2);
         }
     }
 }
