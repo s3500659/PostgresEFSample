@@ -1,5 +1,6 @@
 ﻿using PostgresEF.Models.Entities;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace PostgresEF.Repositories.Interfaces
 {
@@ -7,10 +8,10 @@ namespace PostgresEF.Repositories.Interfaces
     {
         bool SaveChanges();
 
-        IEnumerable<Command> GetAllCommands();
-        Command GetCommandById(int id);
-        void CreateCommand(Command command);
-        void UpdateCommand(Command command);
-        void DeleteCommand(Command command);
+        Task<IEnumerable<Command>> GetAllCommands();
+        Task<Command> GetCommandById(int id);
+        Task CreateCommand(Command command);
+        Task UpdateCommand(Command command);
+        Task DeleteCommand(Command command);
     }
 }

@@ -20,6 +20,8 @@ namespace PostgresEF.Data
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Toy> Toys { get; set; }
         public DbSet<TodoItem> TodoItems { get; set; }
+        public DbSet<Command> Commands { get; set; }
+
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }

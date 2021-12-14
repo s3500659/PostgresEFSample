@@ -15,6 +15,7 @@ using PostgresEF.Interfaces;
 using PostgresEF.Models.Entities;
 using PostgresEF.Models.Interfaces;
 using PostgresEF.Repositories;
+using PostgresEF.Repositories.Interfaces;
 using PostgresEF.Services;
 using System;
 using System.Collections.Generic;
@@ -53,6 +54,8 @@ namespace PostgresEF
             services.AddScoped<ITodoItemFactory, TodoItemFactory>();
 
             services.AddScoped<IProductFactory, ProductFactory>();
+
+            services.AddScoped<ICommanderRepository, CommandRepository>();
 
             services.AddControllers();
 
