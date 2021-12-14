@@ -47,17 +47,18 @@ namespace PostgresEF.Repositories
 
         public bool SaveChanges()
         {
-            return (_context.SaveChangesAsync().Result >= 0);
+            return _context.SaveChangesAsync().Result >= 0;
             
         }
 
-        public async Task UpdateCommand(Command command)
+        public void UpdateCommand(Command command)
         {
-            if (command == null)
-                throw new ArgumentNullException(nameof(command));
+            //if (command == null)
+            //    throw new ArgumentNullException(nameof(command));
 
-            _context.Commands.Update(command);
-            await _context.SaveChangesAsync();
+            //_context.Commands.Update(command);
+            //await _context.SaveChangesAsync();
+            return;
         }
     }
 }

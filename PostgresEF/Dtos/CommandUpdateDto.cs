@@ -2,7 +2,7 @@
 
 namespace PostgresEF.Dtos
 {
-    public class CommanUpdateDto
+    public class CommandUpdateDto
     {
         [Required]
         [MaxLength(255)]

@@ -11,7 +11,7 @@ namespace PostgresEF.Repositories.Interfaces
         Task<IEnumerable<Command>> GetAllCommands();
         Task<Command> GetCommandById(int id);
         Task CreateCommand(Command command);
-        Task UpdateCommand(Command command);
+        void UpdateCommand(Command command);
         Task DeleteCommand(Command command);
     }
 }
